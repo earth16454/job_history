@@ -1,0 +1,38 @@
+CREATE TABLE jobHistory(
+	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  company_name varchar(255) NOT NULL,
+  job_position varchar(255) NOT NULL,
+  application_date timestamp NOT NULL,
+  job_status varchar(255)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+<?php 
+  // Database
+  include('config/db.php');
+  
+  // Set session
+  session_start();
+  if(isset($_POST['records-limit'])){
+      $_SESSION['records-limit'] = $_POST['records-limit'];
+  }
+  
+  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 5;
+  $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
+  $paginationStart = ($page - 1) * $limit;
+  $authors = $connection->query("SELECT * FROM authors LIMIT $paginationStart, $limit")->fetchAll();
+  // Get total records
+  $sql = $connection->query("SELECT count(id) AS id FROM authors")->fetchAll();
+  $allRecrods = $sql[0]['id'];
+  
+  // Calculate total pages
+  $totoalPages = ceil($allRecrods / $limit);
+  // Prev + Next
+  $prev = $page - 1;
+  $next = $page + 1;
+?>
+
+# job_history
+A website for saving job application history.
+
+This project is developed in PHP. You may need to install a server emulator such as XAMPP.
