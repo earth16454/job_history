@@ -1,6 +1,7 @@
 <?php 
 
 require_once('config.php');
+session_start();
 
 if (isset($_REQUEST['delete_id'])) {
   $id = $_REQUEST['delete_id'];

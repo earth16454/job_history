@@ -4,7 +4,11 @@ require_once('process/config.php');
 
 include('pagination.php');
 
+// $timeStamp = $row['date'];
+// $timeStamp = date( "m/d/Y", strtotime($timeStamp));
 
+// $job_history['application_date'] = date("d/M/Y H:i", strtotime($job_history['application_date']));
+// $time = date("d-M-Y H:i:s", strtotime($job_history['application_date']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +23,35 @@ include('pagination.php');
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-light">
+<body>
 
-  <div class="box bg-white shadow p-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">Job history</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create.php">Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create.php">Add</a>
+          </li>
+        </ul>
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+  </nav>  
+
+  <div class="box bg-white shadow px-2 py-3 p-md-4">
     <h2>Job application history</h2>
     <hr class="mb-4">
     <div class="row mb-3">
@@ -29,7 +59,7 @@ include('pagination.php');
         <form action="index.php" method="post">
           <select name="records-limit" id="records-limit" class="form-select custom-select">
             <option disabled selected>Records Limit</option>
-            <?php foreach ([5, 7, 10, 12] as $limit) : ?>
+            <?php foreach ([5, 7, 10, 12, $allRecrods] as $limit) : ?>
               <option <?php if (isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?> value="<?= $limit; ?>">
                 <?= $limit; ?>
               </option>
@@ -51,22 +81,25 @@ include('pagination.php');
             <th>Description:</th>
             <th>Application Date:</th>
             <th>Status:</th>
+            <th>View:</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($job_historys as $job_history) : ?>
+            <?php $job_history['application_date'] = date("d/m/Y, H:i น.", strtotime($job_history['application_date'])); ?>
             <tr>
-              <th scope="row"><?php echo $job_history['id']; ?></th>
-              <td><?php echo $job_history['company_name']; ?></td>
-              <td><?php echo $job_history['job_position']; ?></td>
-              <td><?php echo $job_history['description']; ?></td>
+              <th class="col" scope="row"><?php echo $job_history['id']; ?></th>
+              <td class="col-3"><?php echo $job_history['company_name']; ?></td>
+              <td class="col-2"><?php echo $job_history['job_position']; ?></td>
+              <td class="col-2"><?php echo $job_history['description']; ?></td>
               <td><?php echo $job_history['application_date']; ?></td>
-              <td class="col-1 <?php if ($job_history['job_status'] == 'applied') echo 'text-primary';
-                                if ($job_history['job_status'] == 'rejected') echo 'text-danger' ?>" id="status"><?php echo $job_history["job_status"]; ?></td>
-              <td class="col-1"><a href="process/edit.php?edit_id=<?php echo $job_history['id']; ?>" class="btn btn-warning">Edit</a></td>
-              <td class="col-1"><a href="process/delete.php?delete_id=<?php echo $job_history["id"]; ?>" class="btn btn-outline-danger">Delete</a></td>
+              <td class="<?php if ($job_history['job_status'] == 'applied') echo 'text-primary';
+                          if ($job_history['job_status'] == 'rejected') echo 'text-danger' ?>" id="status"><?php echo $job_history["job_status"]; ?></td>
+              <td><a href="detail.php?id=<?php echo $job_history['id']; ?>" class="link-body-emphasis">View</a></td>
+              <td><a href="edit.php?edit_id=<?php echo $job_history['id']; ?>" class="btn btn-sm btn-warning">Edit</a></td>
+              <td><a href="delete.php?delete_id=<?php echo $job_history["id"]; ?>" class="btn btn-sm btn-outline-danger">Delete</a></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
