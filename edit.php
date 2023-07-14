@@ -2,12 +2,11 @@
 require_once('process/config.php');
 session_start();
 
-if(isset($_GET['edit_id'])){
+if (isset($_GET['edit_id'])) {
   $id = $_GET['edit_id'];
   $stmt = $db->query("SELECT * FROM jobhistory WHERE id = $id");
   $stmt->execute();
   $job_history = $stmt->fetch();
-
 }
 
 
@@ -40,21 +39,21 @@ if(isset($_GET['edit_id'])){
       <form method="POST" action="process/edit.php" class="row">
         <?php if (isset($_SESSION['error'])) { ?>
           <div class="alert alert-danger">
-            <?php 
-              echo $_SESSION['error']; 
-              unset($_SESSION['error']);
+            <?php
+            echo $_SESSION['error'];
+            unset($_SESSION['error']);
             ?>
           </div>
         <?php } ?>
-        <?php if (isset($_SESSION['success'])) { ?>
+        <!-- <?php if (isset($_SESSION['success'])) { ?>
           <div class="alert alert-success">
-            <?php 
-              echo $_SESSION['success']; 
-              unset($_SESSION['success']);
+            <?php
+            echo $_SESSION['success'];
+            unset($_SESSION['success']);
             ?>
           </div>
-        <?php } ?>
-        <input type="hidden" name="id" id="id" value="<?php echo $id; ?>" >
+        <?php } ?> -->
+        <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
         <div class="col-12 col-md-6 mb-3">
           <label for="companyName" class="form-label">Company Name</label>
           <input type="text" class="form-control" name="companyName" id="companyName" required value="<?php echo $job_history['company_name']; ?>" />
@@ -88,10 +87,11 @@ if(isset($_GET['edit_id'])){
           <label for="status" class="form-label">Status</label>
           <select class="form-select <?php include('color.php'); ?>" name="jobStatus" id="status" required>
             <option value="" disabled>Select status</option>
-            <option value="applied" class="text-info" <?php if($job_history['job_status'] == "applied") echo "selected"; ?> >Applied</option>
-            <option value="interviewed" class="text-warning" <?php if($job_history['job_status'] == "interviewed")echo "selected" ?>>Interviewed</option>
-            <option value="rejected" class="text-danger" <?php if($job_history['job_status'] == "rejected")echo "selected" ?>>Rejected</option>
-            <option value="hired" class="text-success" <?php if($job_history['job_status'] == "hired")echo "selected" ?>>Hired</option>
+            <option value="applied" class="text-info" <?php if ($job_history['job_status'] == "applied") echo "selected"; ?>>Applied</option>
+            <option value="contacted_back" class="text-info" <?php if ($job_history['job_status'] == "contacted_back") echo "selected"; ?>>Contacted back</option>
+            <option value="interviewed" class="text-warning" <?php if ($job_history['job_status'] == "interviewed") echo "selected" ?>>Interviewed</option>
+            <option value="rejected" class="text-danger" <?php if ($job_history['job_status'] == "rejected") echo "selected" ?>>Rejected</option>
+            <option value="hired" class="text-success" <?php if ($job_history['job_status'] == "hired") echo "selected" ?>>Hired</option>
           </select>
         </div>
         <div class="col-12 mt-4">
@@ -101,6 +101,34 @@ if(isset($_GET['edit_id'])){
       </form>
     </div>
   </div>
+
+
+  <script>
+    $(document).ready(function() {
+      $('#status').change(function() {
+        if ($('#status').val() == "applied") {
+          $('#status').addClass("text-primary");
+          $('#status').removeClass("text-warning text-danger text-success text-info text-secondary");
+        } else if ($('#status').val() == "contacted_back") {
+          $('#status').addClass("text-info");
+          $('#status').removeClass("text-primary text-danger text-success text-warning text-secondary");
+        } else if ($('#status').val() == "interviewed") {
+          $('#status').addClass("text-warning");
+          $('#status').removeClass("text-primary text-danger text-success text-info text-secondary");
+        } else if ($('#status').val() == "rejected") {
+          $('#status').addClass("text-danger");
+          $('#status').removeClass("text-primary text-warning text-success text-info text-secondary");
+        } else if ($('#status').val() == "hired") {
+          $('#status').addClass("text-success");
+          $('#status').removeClass("text-primary text-warning text-danger");
+        } else {
+          $('#status').removeClass("text-primary text-warning text-danger text-success text-info text-secondary");
+
+        }
+
+      })
+    });
+  </script>
 </body>
 
 </html>

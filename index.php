@@ -95,8 +95,7 @@ include('pagination.php');
               <td class="col-2"><?php echo $job_history['job_position']; ?></td>
               <td class="col-2"><?php echo $job_history['description']; ?></td>
               <td><?php echo $job_history['application_date']; ?></td>
-              <td class="<?php if ($job_history['job_status'] == 'applied') echo 'text-primary';
-                          if ($job_history['job_status'] == 'rejected') echo 'text-danger' ?>" id="status"><?php echo $job_history["job_status"]; ?></td>
+              <td class="<?php include("color.php"); ?>"><?php echo $job_history["job_status"]; ?></td>
               <td><a href="detail.php?id=<?php echo $job_history['id']; ?>" class="link-body-emphasis">View</a></td>
               <td><a href="edit.php?edit_id=<?php echo $job_history['id']; ?>" class="btn btn-sm btn-warning">Edit</a></td>
               <td><a href="delete.php?delete_id=<?php echo $job_history["id"]; ?>" class="btn btn-sm btn-outline-danger">Delete</a></td>
