@@ -39,9 +39,11 @@ if (isset($_GET['id'])) {
 </head>
 
 <body class="">
+  <?php include('component/header.html'); ?>
+
   <div class="container">
     <a href="index.php" class="btn btn-outline-secondary mt-5 px-3">back</a>
-    <div class="bg-white shadow p-4 mt-3">
+    <div class="bg-white shadow p-4 mt-3 mb-5">
       <h2>Job application history</h2>
       <hr class="mb-3 mb-md-4">
       <div class="row mb-5">
@@ -58,6 +60,30 @@ if (isset($_GET['id'])) {
             </div>
             <div class="col-8">
               <?php echo $job_history['job_position']; ?>
+            </div>
+            <div class="col-4 fw-bold text-success">
+              Salary :
+            </div>
+            <div class="col-8">
+              <?php echo $job_history['job_salary']; ?>
+            </div>
+            <div class="col-4 fw-bold text-success">
+              Submit By :
+            </div>
+            <div class="col-8">
+              <?php 
+                $submit_by = Null;
+                for($i = 1; $i <=4; $i++){
+                  if(!empty($job_history["submit_by$i"])){
+                    if($submit_by == Null){
+                      $submit_by = $job_history["submit_by$i"];
+                    } else {
+                      $submit_by = $submit_by . ", " . $job_history["submit_by$i"];
+                    }
+                  }
+                }
+                if(!empty($submit_by)) echo $submit_by;
+              ?>
             </div>
             <div class="col-4 fw-bold text-success">
               Description :
@@ -99,8 +125,8 @@ if (isset($_GET['id'])) {
           <div class="shadow map" id="map">
             <?php echo $job_history['location']; ?>
           </div>
-    
-    
+
+
         </div>
       </div>
     </div>
@@ -108,6 +134,9 @@ if (isset($_GET['id'])) {
   </div>
 
   </div>
+
+  
+  <script src="js/bootstrap.bundle.min.js"></script>
 
   <script>
     $('#map iframe').attr("width", "100%");

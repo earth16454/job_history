@@ -48,8 +48,8 @@ if (isset($_GET['edit_id'])) {
         <!-- <?php if (isset($_SESSION['success'])) { ?>
           <div class="alert alert-success">
             <?php
-            echo $_SESSION['success'];
-            unset($_SESSION['success']);
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
             ?>
           </div>
         <?php } ?> -->
@@ -61,6 +61,35 @@ if (isset($_GET['edit_id'])) {
         <div class="col-12 col-md-6 mb-3">
           <label for="jobPosition" class="form-label">Job Position</label>
           <input type="text" class="form-control" name="jobPosition" id="jobPosition" required value="<?php echo $job_history['job_position']; ?>" />
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="jobPosition" class="form-label">Job Salary</label>
+          <input type="text" class="form-control" name="jobSaraly" id="jobSaraly" value="<?php echo $job_history['job_salary']; ?>" />
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="" class="form-label">Submit by <span class="text-danger">*</span></label><br>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by1" id="submitBy_email" value="Email" <?php if($job_history['submit_by1'] == "Email") echo "checked"; ?>>
+                <label for="submitBy_email" class="form-label fw-light">Email</label>
+              </div>
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by2" id="submitBy_jobnorth" value="JobNorth" <?php if($job_history['submit_by2'] == "JobNorth") echo "checked"; ?>>
+                <label for="submitBy_jobnorth" class="form-label fw-light">JobNorth</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by3" id="submitBy_jobthai" value="JobThai" <?php if($job_history['submit_by3'] == "JobThai") echo "checked"; ?>>
+                <label for="submitBy_jobthai" class="form-label fw-light">JobThai</label>
+              </div>
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by4" id="submitBy_other" value="Other" <?php if($job_history['submit_by4'] == "Other") echo "checked"; ?>>
+                <label for="submitBy_other" class="form-label fw-light">Other</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-12 mb-3">
           <label for="description" class="form-label">Description</label>
@@ -102,6 +131,8 @@ if (isset($_GET['edit_id'])) {
     </div>
   </div>
 
+  
+  <script src="js/bootstrap.bundle.min.js"></script>
 
   <script>
     $(document).ready(function() {

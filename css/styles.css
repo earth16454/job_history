@@ -3,6 +3,9 @@
 :root {
   /* --bs-border-radius: 0.175rem; */
   --bs-border-color: #b8bdc9;
+  --bs-indigo-rgb: #6610f2;
+  --bs-purple-rgb: #6f42c1;
+  --bs-pink-rgb: #e83e8c;
 }
 
 body {
@@ -36,7 +39,56 @@ body {
 }
 
 .text-orange {
-  color: #F25814;
+  color: #fd7e14 !important;
+}
+
+.text-indigo {
+  color: #6610f2 !important;
+}
+
+.text-purple {
+  color: #6f42c1 !important;
+}
+
+.text-pink {
+  color: #e83e8c !important;
+}
+
+.bg-indigo {
+  --bs-bg-opacity: 1;
+  background-color: var(--bs-indigo-rgb) !important;
+}
+
+.bg-purple {
+  --bs-bg-opacity: 1;
+  background-color: var(--bs-purple-rgb) !important;
+}
+
+.bg-pink {
+  --bs-bg-opacity: 1;
+  background-color: var(--bs-pink-rgb) !important;
+}
+
+.btn-indigo {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #6610f2;
+  --bs-btn-border-color: #6610f2;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #570ecc;
+  --bs-btn-hover-border-color: #510cc0;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #510cc0;
+  --bs-btn-active-border-color: #460ba6;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #6610f2;
+  --bs-btn-disabled-border-color: #6610f2;
+}
+
+.navbar {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .form-label {
@@ -66,6 +118,16 @@ body {
   margin: 0 auto;
   width: 100%;
   height: 100%;
+}
+
+.img-profile {
+  /* padding: 0.1rem;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  max-width: 100%;
+  height: auto; */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Signup Page */

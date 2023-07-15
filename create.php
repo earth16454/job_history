@@ -23,8 +23,9 @@ session_start();
 </head>
 
 <body class="">
+  <?php include('component/header.html'); ?>
   <div class="container my-5">
-    <div class="bg-white shadow-sm p-md-5 p-2">
+    <div class="bg-white shadow-sm p-md-5 p-3">
       <a href="index.php" class="btn btn-outline-secondary mb-3">back</a>
       <h1 class="">Job Application History</h1>
       <hr class="mb-3">
@@ -46,12 +47,42 @@ session_start();
           </div>
         <?php } ?>
         <div class="col-12 col-md-6 mb-3">
-          <label for="companyName" class="form-label">Company Name</label>
+          <label for="companyName" class="form-label">Company Name <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="companyName" id="companyName" required />
         </div>
         <div class="col-12 col-md-6 mb-3">
-          <label for="jobPosition" class="form-label">Job Position</label>
+          <label for="jobPosition" class="form-label">Job Position <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="jobPosition" id="jobPosition" required />
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="jobPosition" class="form-label">Job Salary</label>
+          <input type="text" class="form-control" name="jobSaraly" id="jobSaraly" />
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="" class="form-label">Submit by <span class="text-danger">*</span></label><br>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by1" id="submitBy_email" value="Email">
+                <label for="submitBy_email" class="form-label fw-light">Email</label>
+              </div>
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by2" id="submitBy_jobnorth" value="JobNorth">
+                <label for="submitBy_jobnorth" class="form-label fw-light">JobNorth</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by3" id="submitBy_jobthai" value="JobThai">
+                <label for="submitBy_jobthai" class="form-label fw-light">JobThai</label>
+              </div>
+              <div class="form-check-inline">
+                <input type="checkbox" name="submit_by4" id="submitBy_other" value="Other">
+                <label for="submitBy_other" class="form-label fw-light">Other</label>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="col-12 mb-3">
           <label for="description" class="form-label">Description</label>
@@ -62,21 +93,21 @@ session_start();
           <label for="location" class="form-label">Location</label>
           <!-- <input type="text" class="form-control" name="location" id="location" placeholder='<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46154.16302962874!2d98.95017560242398!3d18.793812852526575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3b3487bc5d7b%3A0xdc4d4833433c7682!2sNever%20Sleep!5e0!3m2!1sth!2sth!4v1689196317299!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'> -->
           <textarea class="form-control" name="location" id="location" rows="6" placeholder='<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46154.16302962874!2d98.95017560242398!3d18.793812852526575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3b3487bc5d7b%3A0xdc4d4833433c7682!2sNever%20Sleep!5e0!3m2!1sth!2sth!4v1689196317299!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'></textarea>
-          </div>
+        </div>
         <div class="col-12 mb-3">
-          <label for="address" class="form-label">Address</label>
-          <input type="text" class="form-control" name="address" id="address">
+          <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" name="address" id="address" required>
         </div>
         <div class="col-12 mb-3">
           <label for="address" class="form-label">Link</label>
           <input type="text" class="form-control" name="link" id="link">
         </div>
         <div class="col-12 col-md-6 mb-3">
-          <label for="applicationDate" class="form-label">Application Date</label>
+          <label for="applicationDate" class="form-label">Application Date <span class="text-danger">*</span></label>
           <input type="datetime-local" class="form-control" name="applicationDate" id="applicationDate" required />
         </div>
         <div class="col-12 col-md-6 mb-3">
-          <label for="status" class="form-label">Status</label>
+          <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
           <select class="form-select text-secondary" name="jobStatus" id="status" required>
             <option value="" disabled selected>Select status</option>
             <option value="applied" class="text-primary">Applied</option>
@@ -95,18 +126,18 @@ session_start();
     </div>
   </div>
 
+  
+  <script src="js/bootstrap.bundle.min.js"></script>
   <script>
     $(document).ready(function() {
       $('#status').change(function() {
         if ($('#status').val() == "applied") {
           $('#status').addClass("text-primary");
           $('#status').removeClass("text-warning text-danger text-success text-info text-secondary");
-        } 
-        else if ($('#status').val() == "contacted_back") {
+        } else if ($('#status').val() == "contacted_back") {
           $('#status').addClass("text-info");
           $('#status').removeClass("text-primary text-danger text-success text-warning text-secondary");
-        } 
-        else if ($('#status').val() == "interviewed") {
+        } else if ($('#status').val() == "interviewed") {
           $('#status').addClass("text-warning");
           $('#status').removeClass("text-primary text-danger text-success text-info text-secondary");
         } else if ($('#status').val() == "rejected") {

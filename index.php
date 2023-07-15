@@ -24,32 +24,7 @@ include('pagination.php');
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">Job history</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample07">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="create.php">Add</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="create.php">Add</a>
-          </li>
-        </ul>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
-      </div>
-    </div>
-  </nav>  
+  <?php include('component/header.html'); ?>
 
   <div class="box bg-white shadow px-2 py-3 p-md-4">
     <h2>Job application history</h2>
@@ -67,7 +42,10 @@ include('pagination.php');
           </select>
         </form>
       </div>
-      <div class="col-10 text-end">
+      <div class="col-2 d-flex align-items-center">
+        <p class="m-0 fw-bold">Total records : <span class="text-indigo"><?php echo $allRecrods; ?></span></p>
+      </div>
+      <div class="col-8 text-end">
         <a href="create.php" class="btn btn-outline-success" style="width: 8rem;">Add</a>
       </div>
     </div>
@@ -139,6 +117,7 @@ include('pagination.php');
   </div>
 
   <!-- jQuery + Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
