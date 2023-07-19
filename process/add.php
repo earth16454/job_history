@@ -40,8 +40,6 @@ if (isset($_REQUEST['submit'])) {
   } else if (empty($application_date)) {
     $_SESSION['error'] = "please Enter Application Date";
     header("location: ../create.php");
-  } else if(empty($submit_by)){
-    $submit_by = "Other";
   } else {
     try {
       if(!isset($_SESSION['error'])){
